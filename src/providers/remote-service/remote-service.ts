@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
@@ -17,7 +17,6 @@ const baseUrl = 'http://localhost/api';
 export class RemoteServiceProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello RemoteServiceProvider Provider');
   }
 
   getColors(userId) {
@@ -26,6 +25,14 @@ export class RemoteServiceProvider {
 
   getAllUsers() {
     return this.http.get(baseUrl+'/users');
+  }
+
+  createUser() {
+    return this.http.get(baseUrl+'/create-user');
+  }
+
+  deleteUser(userId) {
+    return this.http.delete(baseUrl+'/user/'+userId);
   }
 
   shuffleColors(userId): Observable<any> {

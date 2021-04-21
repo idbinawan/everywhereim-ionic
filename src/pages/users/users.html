@@ -7,7 +7,7 @@
       class="user"
       *ngFor="let user of users; let i = index"
     >
-      <div class="inline">{{ user.id }}.</div>
+      <div class="inline user-id">{{ user.id }}.</div>
       <div class="inline">
           <div
               class="color"
@@ -21,9 +21,12 @@
           >&or;</div>
       <div
           class="inline icon"
+          *ngIf="user.colors.length>1;else empty_content"
           (click)="shuffleColors(user.id)"
-          >&oplus;</div>
+          ><img src="assets/imgs/reload.png" class="icon-reload" /></div>
     </div>
   </div>
 
 </ion-content>
+
+<ng-template #empty_content><div class="inline icon">&nbsp;</div></ng-template>
