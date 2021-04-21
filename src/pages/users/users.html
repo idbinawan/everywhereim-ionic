@@ -1,0 +1,29 @@
+<ion-content padding>
+  <img src="/assets/imgs/logo.png" id="logo" />
+  <div id="user-list">
+    <hr />
+    <h1>Gebruikers</h1>
+    <div
+      class="user"
+      *ngFor="let user of users; let i = index"
+    >
+      <div class="inline">{{ user.id }}.</div>
+      <div class="inline">
+          <div
+              class="color"
+              [ngStyle]="{'background-color': color.color_code}"
+              *ngFor="let color of user.colors; let idx = index"
+              ></div>
+      </div>
+      <div
+          class="inline icon"
+          *ngIf="user.colors.length>1;else empty_content"
+          >&or;</div>
+      <div
+          class="inline icon"
+          (click)="shuffleColors(user.id)"
+          >&oplus;</div>
+    </div>
+  </div>
+
+</ion-content>

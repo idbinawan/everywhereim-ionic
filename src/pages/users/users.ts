@@ -3,26 +3,36 @@ import { NavController } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-users',
+  templateUrl: 'users.html'
 })
-export class HomePage {
-  colors: any;
+export class UsersPage {
+  users: any;
 
   constructor(public navCtrl: NavController, private remoteService : RemoteServiceProvider) {
-    this.getColors();
+    this.getUsers();
   }
 
-  getColors(){
-    this.remoteService.getColors(1)
+  getUsers(){
+    this.remoteService.getAllUsers()
     .subscribe(
       data => {
         console.log(data);
-        this.colors = data;
+        this.users = data;
       },
       error => {
         console.log(error);
       });
   }
 
+  shuffleColors(userId){
+    this.remoteService.shuffleColors(userId)
+    .subscribe(
+      data => {
+        this.getUsers();
+      },
+      error => {
+        console.log(error);
+      });
+  }
 }
